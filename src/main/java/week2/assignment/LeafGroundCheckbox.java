@@ -3,15 +3,16 @@ package week2.assignment;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class LeafGroundCheckbox {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		ChromeDriver driver = new ChromeDriver();
+		WebDriver driver = new FirefoxDriver();
 
 		driver.get("https://leafground.com/checkbox.xhtml");
 		driver.manage().window().maximize();
@@ -38,21 +39,22 @@ public class LeafGroundCheckbox {
 		// selecting the no name check box
 		driver.findElement(By.xpath("//h5[contains(text(),'Tri')]/parent::div//div[contains(@class,'ui-chkbox-box')]"))
 				.click();
+		
 		// This step is returning empty string. Hence validation was not working
 		WebElement stMsg = driver.findElement(By.cssSelector("div[class='ui-growl-message'] p"));
+		String stMsg1 = (String) ((JavascriptExecutor) driver).executeScript("arguments[0].textContent",stMsg);
+		String stateMessage = stMsg1;
+		System.out.println("Try 1: " + stMsg1.toString());
+//		if (stateMessage.equals("")) {
+//			stateMessage = stMsg.getAttribute("innerHTML");
+//			System.out.println("Try 2: " + stateMessage);
+//			if (stateMessage.equals("")) {
+//				stateMessage = stMsg.getAttribute("textContent");
+//				System.out.println("Try 3: " + stateMessage);
+//			}
+//		}
 
-		String stateMessage = stMsg.getText();
-		System.out.println("Try 1: " + stateMessage);
-		if (stateMessage.equals("")) {
-			stateMessage = stMsg.getAttribute("innerHTML");
-			System.out.println("Try 2: " + stateMessage);
-			if (stateMessage.equals("")) {
-				stateMessage = stMsg.getAttribute("textContent");
-				System.out.println("Try 3: " + stateMessage);
-			}
-		}
-
-		System.out.println(stateMessage);
+//		System.out.println(st);
 
 		if (stateMessage.contains("State = 0")) {
 			System.out.println("State '0' is selected");
