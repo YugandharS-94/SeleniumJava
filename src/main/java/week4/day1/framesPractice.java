@@ -2,7 +2,9 @@ package week4.day1;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -13,7 +15,7 @@ import java.util.logging.Level;
 public class framesPractice {
     public static void main(String[] args) {
         java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.INFO);
-        ChromeDriver driver = new ChromeDriver();
+        WebDriver driver = new EdgeDriver();
 
 
         driver.get("https://www.w3schools.com/js/tryit.asp?filename=tryjs_confirm");

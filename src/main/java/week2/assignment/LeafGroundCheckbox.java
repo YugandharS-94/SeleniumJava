@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.time.Duration;
 
 public class LeafGroundCheckbox {
@@ -39,24 +40,8 @@ public class LeafGroundCheckbox {
                 .click();
 
         // This step is returning empty string. Hence validation was not working
-        Thread.sleep(3000);
-        WebElement stMsg = driver.findElement(By.cssSelector("span[class='ui-growl-title'] + p"));
-//        By textSelector = By.cssSelector("");
-        String stateMessage = stMsg.getText();
-//        String string1 = ((JavascriptExecutor) driver).executeScript("return document.querySelector(\"span[class='ui-growl-title'] + p\").textContent;").toString();
-//        String string = object.toString();
-
-        System.out.println("Try 1: " + stateMessage);
-		if (stateMessage.isEmpty()) {
-			stateMessage = stMsg.getAttribute("innerHTML");
-			System.out.println("Try 2: " + stateMessage);
-			if (stateMessage != null) {
-				stateMessage = stMsg.getAttribute("textContent");
-				System.out.println("Try 3: " + stateMessage);
-			}
-		}
-
-//		System.out.println(st);
+        Thread.sleep(2000);
+        String stateMessage = driver.findElement(By.xpath("//p[contains(text(),'State')]")).getText();
 
         if (stateMessage.equals("State = 0")) {
             System.out.println("State '0' is selected");
@@ -66,12 +51,12 @@ public class LeafGroundCheckbox {
             System.out.println("State '2' is selected");
         }
 
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         // enable toggle switch
         driver.findElement(By.className("ui-toggleswitch-slider")).click();
         String toggleText = driver.findElement(By.className("ui-growl-title")).getText();
         if (toggleText.contains("Checked")) {
-            System.out.println("Toggled");
+            System.out.println("Checked");
         } else {
             System.out.println("Untoggled");
         }

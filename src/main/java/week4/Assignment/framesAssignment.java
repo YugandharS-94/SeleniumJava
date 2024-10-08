@@ -17,7 +17,6 @@ public class framesAssignment {
         driver.get("https://www.w3schools.com/js/tryit.asp?filename=tryjs_prompt");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Set<String> windowHandles = driver.getWindowHandles();
         // Switching to the frame
         driver.switchTo().frame("iframeResult");
         // Clicked on the "Try it" button

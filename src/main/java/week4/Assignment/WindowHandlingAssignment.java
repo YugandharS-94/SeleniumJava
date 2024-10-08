@@ -1,23 +1,40 @@
 package week4.Assignment;
 
+import io.cucumber.java.cs.Ale;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 
 public class WindowHandlingAssignment {
 
+    public static void isAlertPresent(WebDriver driver){
+        try {
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+        } catch (NoAlertPresentException e){
+            e.getStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
 
-
-        WebDriver driver = new FirefoxDriver();
-//		WebDriver driver = new ChromeDriver();
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--disable-notifications");
+//        WebDriver driver = new FirefoxDriver();
+		WebDriver driver = new ChromeDriver();
+//        WebDriver driver = new EdgeDriver();
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -25,13 +42,13 @@ public class WindowHandlingAssignment {
         driver.get("http://leaftaps.com/opentaps/");
 
         // Login page
-        driver.findElement(By.id("username")).sendKeys("demosalesmanager");
+        driver.findElement(By.id("username")).sendKeys("DemoCsr");
         driver.findElement(By.id("password")).sendKeys("crmsfa");
         driver.findElement(By.className("decorativeSubmit")).click();
 
         // selecting CRM/SFA
         driver.findElement(By.linkText("CRM/SFA")).click();
-
+        isAlertPresent(driver);
         // click on Contacts tab
         driver.findElement(By.xpath("//a[text()='Contacts']")).click();
         driver.findElement(By.xpath("//a[text()='Merge Contacts']")).click();
